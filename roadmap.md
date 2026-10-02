@@ -4,3 +4,7 @@
 - [x] Translate the complete quiz into neutral Latin American Spanish
 - [x] Humanize the quiz copy while preserving meaning and progression
 - [x] Validate every Spanish screen on mobile and desktop
+- [x] Reduce the quiz to 16 high-intent questions
+- [x] Remove unnecessary interruption screens
+- [x] Optimize heavy images and delivery priority
+- [x] Validate the shorter quiz on mobile and desktop
