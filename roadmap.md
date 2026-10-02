@@ -8,3 +8,6 @@
 - [x] Remove unnecessary interruption screens
 - [x] Optimize heavy images and delivery priority
 - [x] Validate the shorter quiz on mobile and desktop
+- [ ] Apply the selected cinematic conversion-focused redesign
+- [ ] Add motivational rewards and smoother transitions
+- [ ] Revalidate speed and the complete flow on mobile and desktop

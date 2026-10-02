@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Check, Heart, Sparkles } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Heart, LockKeyhole, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/quiz/logo.svg";
 import age18 from "@/assets/quiz/age-18.webp";
@@ -55,6 +55,13 @@ const steps: Step[] = [
   {kind:"info",title:"Tu plan ideal para atraer al hombre indicado",body:"Según tus respuestas, puedes desarrollar la confianza y las habilidades que necesitas para transformar tu vida amorosa antes de diciembre de 2026.",variant:"plan"},
 ];
 
+const encouragements = [
+  "Este momento es para ti.",
+  "Cada respuesta revela algo valioso sobre ti.",
+  "Tu claridad emocional está creciendo.",
+  "Estás más cerca de la relación que deseas.",
+];
+
 function Brand(){return <img src={logo} alt="Muses Academy" className="h-[22px] w-auto"/>}
 function AppButton({children,onClick,disabled=false,className=""}:{children:React.ReactNode;onClick:()=>void;disabled?:boolean;className?:string}){return <button type="button" onClick={onClick} disabled={disabled} className={`quiz-button ${className}`}>{children}</button>}
 
@@ -70,31 +77,35 @@ function Quiz(){
  if(!step)return <Welcome onStart={()=>setScreen(0)}/>;
  if(step.kind==="info")return <InfoPage step={step} onBack={back} onNext={next}/>;
  const selected=answers[screen]||[]; const progress=Math.round(((screen+1)/steps.length)*100);
+ const questionNumber=steps.slice(0,screen+1).filter(item=>item.kind!=="info").length;
+ const encouragement=encouragements[Math.min(3,Math.floor(progress/26))];
  return <main className="quiz-shell">
-   <div className="quiz-top"><button aria-label="Volver" onClick={back} className="back-button"><ArrowLeft/></button><span className="section-pill">{step.section}</span><span className="top-spacer"/></div>
-   <div className="progress-bars" aria-label={`${progress}% completado`}>{[0,1,2,3].map(i=><span key={i} className={progress>(i*25)?"active":""}/>)}</div>
-   <section className="question-wrap">
+   <div className="quiz-top"><button aria-label="Volver" onClick={back} className="back-button"><ArrowLeft/></button><Brand/><span className="progress-percent">{progress}%</span></div>
+   <div className="journey-row"><span>Tu viaje de transformación</span><strong>Pregunta {questionNumber} de 16</strong></div>
+   <div className="progress-track" aria-label={`${progress}% completado`}><i style={{width:`${progress}%`}}/></div>
+   <section key={screen} className="question-wrap animate-fade-in">
+    <div className="encouragement"><Sparkles/><span>{encouragement}</span></div>
     <h1>{step.title}</h1>{step.subtitle&&<p className="subtitle">{step.subtitle}</p>}
     {step.kind==="scale"&&<ScaleGraphic/>}
     <div className={`option-list ${step.kind==="scale"?"scale-options":""}`}>
-      {step.options.map((option,i)=>{const active=selected.includes(option); return <AppButton key={option} onClick={()=>choose(option,step.kind==="multi")} className={`option-button ${active?"selected":""}`}>
-        {step.kind!=="multi"&&<span className="option-icon">{i===0?<Heart/>:<Sparkles/>}</span>}
+      {step.options.map((option)=>{const active=selected.includes(option); return <AppButton key={option} onClick={()=>choose(option,step.kind==="multi")} className={`option-button ${active?"selected":""}`}>
         <span className="option-copy">{option.split("\n").map((line,j)=><span key={line} className={j?"option-detail":""}>{line}</span>)}</span>
-        {step.kind==="multi"&&<span className="check-circle">{active&&<Check/>}</span>}
+        <span className="check-circle">{active?<Check/>:<ChevronRight/>}</span>
       </AppButton>})}
     </div>
     {step.image&&<img src={step.image} alt="" className="question-image" loading="lazy" decoding="async"/>}
+    <div className="privacy-note"><LockKeyhole/> Tus respuestas son privadas y seguras</div>
    </section>
    {step.kind==="multi"&&<div className="sticky-action"><AppButton onClick={next} disabled={!selected.length}>CONTINUAR</AppButton></div>}
  </main>
 }
 
-function Welcome({onStart}:{onStart:()=>void}){const ages=[[age18,"18-29"],[age30,"30-39"],[age40,"40-49"],[age50,"50+"]];return <main className="welcome"><Brand/><div className="welcome-copy"><h1>CONVIÉRTETE EN UNA MUJER DE ALTO VALOR</h1><h2>Y DESPIERTA SU INTERÉS</h2><p>Responde este quiz para personalizar tu experiencia<br/>Comienza seleccionando tu edad</p></div><div className="age-grid">{ages.map(([src,label],index)=><button key={label} onClick={onStart} className="age-card"><img src={src} alt="" loading={index===0?"eager":"lazy"} decoding="async" fetchPriority={index===0?"high":"auto"}/><span>{label}</span></button>)}</div><p className="legal">Al continuar, aceptas los <a href="https://quiz.musesacademy.io/terms">Términos y condiciones</a>, <a href="https://quiz.musesacademy.io/privacy">Política de privacidad</a>, <a href="https://quiz.musesacademy.io/subterms">Términos de suscripción</a>.</p><footer>© 2026 APPSORAMA MEDIA LIMITED, Hong Kong. Todos los derechos reservados.</footer></main>}
+function Welcome({onStart}:{onStart:()=>void}){const ages=[[age18,"18-29"],[age30,"30-39"],[age40,"40-49"],[age50,"50+"]];return <main className="welcome"><Brand/><div className="welcome-copy animate-fade-in"><span className="welcome-kicker"><Sparkles/> Tu nueva etapa comienza aquí</span><h1>CONVIÉRTETE EN LA MUJER QUE <em>SIEMPRE SUPISTE QUE PODÍAS SER</em></h1><p>Descubre qué está bloqueando tu vida amorosa y recibe un plan creado para ti.</p><div className="welcome-proof"><span><b>500.000+</b> mujeres</span><span><b>3 min</b> para ti</span><span><b>100%</b> personal</span></div><h2>¿Cuál es tu edad?</h2><small>Elige una opción para comenzar</small></div><div className="age-grid">{ages.map(([src,label],index)=><button key={label} onClick={onStart} className="age-card"><img src={src} alt="" loading={index===0?"eager":"lazy"} decoding="async" fetchPriority={index===0?"high":"auto"}/><span>{label}<ChevronRight/></span></button>)}</div><div className="safe-line"><LockKeyhole/> Tus respuestas son privadas y seguras</div><p className="legal">Al continuar, aceptas los <a href="https://quiz.musesacademy.io/terms">Términos y condiciones</a>, <a href="https://quiz.musesacademy.io/privacy">Política de privacidad</a>, <a href="https://quiz.musesacademy.io/subterms">Términos de suscripción</a>.</p><footer>© 2026 APPSORAMA MEDIA LIMITED, Hong Kong. Todos los derechos reservados.</footer></main>}
 
-function InfoPage({step,onBack,onNext}:{step:Info;onBack:()=>void;onNext:()=>void}){return <main className="quiz-shell info-page"><div className="info-header"><button aria-label="Volver" onClick={onBack} className="back-button"><ArrowLeft/></button><Brand/><span className="top-spacer"/></div><section className="info-content">
+function InfoPage({step,onBack,onNext}:{step:Info;onBack:()=>void;onNext:()=>void}){return <main className="quiz-shell info-page"><div className="info-header"><button aria-label="Volver" onClick={onBack} className="back-button"><ArrowLeft/></button><Brand/><span className="top-spacer"/></div><section className="info-content animate-fade-in">
   {step.variant==="research"?<Research step={step}/>:step.variant==="summary"?<Summary step={step}/>:step.variant==="plan"?<Plan step={step}/>:<><h1>{step.title}</h1><p>{step.body}</p>{step.image&&<img src={step.image} alt="" className={`info-image ${step.variant==="coach"?"coach-image":""}`} loading="lazy" decoding="async"/>} {step.variant==="coach"&&<div className="coach-card"><strong>Contenido revisado por un especialista</strong><span>Santiago Delgado · Coach de relaciones</span></div>}</>}
  </section><div className="sticky-action"><AppButton onClick={onNext}>CONTINUAR</AppButton></div></main>}
-function Research({step}:{step:Info}){return <><div className="research-number">Más de 500.000 mujeres</div><div className="research-kicker">ya probaron nuestro</div><h1>plan para despertar su interés</h1><p>{step.body}</p><div className="team-card"><div className="avatar">MA</div><span><strong>Equipo de Muses Academy</strong><small>Respaldado por investigaciones de universidades reconocidas.</small></span></div></>}
+function Research({step}:{step:Info}){return <><div className="milestone-icon"><Heart/></div><div className="research-number">Más de 500.000 mujeres</div><div className="research-kicker">ya dieron el primer paso</div><h1>Ahora es tu momento de brillar</h1><p>{step.body}</p><div className="team-card"><div className="avatar">MA</div><span><strong>Creado para tu momento</strong><small>Con herramientas inspiradas en psicología y relaciones.</small></span></div></>}
 function Summary({step}:{step:Info}){return <><h1 className="center-title">{step.title}</h1><div className="summary-card"><div className="summary-label"><strong>Nivel de confianza</strong><small>Excelente</small></div><div className="confidence-meter"><i/></div><div className="meter-labels"><span>Bajo</span><span>Intermedio</span><span>Alto</span></div></div><div className="summary-note"><strong>♨ ¡Tienes un gran potencial para transformar tu vida amorosa!</strong><p>{step.body}</p></div><div className="profile-card"><div className="traits"><span>🎯 <small>Motivación</small><b>Alto</b></span><span>⭐ <small>Potencial</small><b>Alto</b></span><span>◷ <small>Enfoque</small><b>Amplio</b></span><span>📚 <small>Conocimiento</small><b>Alto</b></span></div><img src={step.image} alt="" loading="lazy" decoding="async"/></div><small className="illustrative">Imagen con fines ilustrativos</small></>}
 function Plan({step}:{step:Info}){return <><h1 className="plan-title"><span>Tu plan ideal para</span>atraer al hombre indicado</h1><p>{step.body}</p><div className="chart"><div className="chart-line"/><div className="chart-months"><span>Oct</span><span>Nov</span><span>Dic</span><span>Ene</span></div><div className="chart-label"><span>Ahora</span><span>Confianza en el amor</span></div></div><small className="illustrative">Este gráfico es ilustrativo; los resultados pueden variar.</small></>}
 function ScaleGraphic(){return <div className="scale-graphic"><div className="scale-person"><img src={focusAsset.url} alt="" loading="lazy" decoding="async"/></div><div className="scale-lines"><span/><span/><span/><span/></div></div>}
