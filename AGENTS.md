@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep the quiz as a single state-driven index route because its screens form one non-shareable sequential session.
+- Serve large quiz artwork as optimized WebP assets from the project CDN to minimize initial download size.
