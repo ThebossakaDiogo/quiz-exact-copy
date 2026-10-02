@@ -1,6 +1,6 @@
 - [x] Recreate full quiz flow and visuals
 - [x] Validate progression, selections, and final loading state
 - [x] Fix broken option layouts and revalidate every quiz step
-- [ ] Translate the complete quiz into neutral Latin American Spanish
-- [ ] Humanize the quiz copy while preserving meaning and progression
-- [ ] Validate every Spanish screen on mobile and desktop
+- [x] Translate the complete quiz into neutral Latin American Spanish
+- [x] Humanize the quiz copy while preserving meaning and progression
+- [x] Validate every Spanish screen on mobile and desktop
