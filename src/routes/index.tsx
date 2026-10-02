@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Check, Circle, Heart, Sparkles, Star } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, Check, Heart, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/quiz/logo.svg";
 import age18 from "@/assets/quiz/age-18.webp";
 import age30 from "@/assets/quiz/age-30.webp";
@@ -88,10 +88,11 @@ function Quiz(){
  const [loading,setLoading]=useState(0);
  useEffect(()=>{if(screen!==steps.length)return; const id=window.setInterval(()=>setLoading(v=>Math.min(100,v+1)),45);return()=>window.clearInterval(id)},[screen]);
  const next=()=>setScreen(s=>s+1); const back=()=>setScreen(s=>Math.max(-1,s-1));
- const choose=(value:string,multi=false)=>{if(multi){setAnswers(a=>({...a,[screen]:(a[screen]||[]).includes(value)?a[screen].filter(x=>x!==value):[...(a[screen]||[]),value]}))}else{setAnswers(a=>({...a,[screen]:[value]}));window.setTimeout(next,180)}};
+ const choose=(value:string,multi=false)=>{if(multi){setAnswers(a=>{const current=a[screen]??[];return {...a,[screen]:current.includes(value)?current.filter(x=>x!==value):[...current,value]}})}else{setAnswers(a=>({...a,[screen]:[value]}));window.setTimeout(next,180)}};
  if(screen<0)return <Welcome onStart={()=>setScreen(0)}/>;
  if(screen===steps.length)return <Loading progress={loading} onBack={back}/>;
  const step=steps[screen];
+ if(!step)return <Welcome onStart={()=>setScreen(0)}/>;
  if(step.kind==="info")return <InfoPage step={step} onBack={back} onNext={next}/>;
  const selected=answers[screen]||[]; const progress=Math.round(((screen+1)/steps.length)*100);
  return <main className="quiz-shell">
