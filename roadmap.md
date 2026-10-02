@@ -7,4 +7,4 @@
 - [x] Reduce the quiz to 16 high-intent questions
 - [x] Remove unnecessary interruption screens
 - [x] Optimize heavy images and delivery priority
-- [ ] Validate the shorter quiz on mobile and desktop
+- [x] Validate the shorter quiz on mobile and desktop
