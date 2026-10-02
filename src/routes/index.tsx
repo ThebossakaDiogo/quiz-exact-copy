@@ -6,26 +6,24 @@ import age18 from "@/assets/quiz/age-18.webp";
 import age30 from "@/assets/quiz/age-30.webp";
 import age40 from "@/assets/quiz/age-40.webp";
 import age50 from "@/assets/quiz/age-50.webp";
-import help from "@/assets/quiz/help.webp";
-import gotYou from "@/assets/quiz/got-you.webp";
-import notAlone from "@/assets/quiz/not-alone.webp";
-import dreams from "@/assets/quiz/dreams.webp";
 import universities from "@/assets/quiz/universities.webp";
-import confidence from "@/assets/quiz/confidence.webp";
-import profile from "@/assets/quiz/profile.png";
 import brain from "@/assets/quiz/brain.webp";
-import focus from "@/assets/quiz/focus.png";
-import time from "@/assets/quiz/time.png";
+import profileAsset from "@/assets/quiz/profile.webp.asset.json";
+import focusAsset from "@/assets/quiz/focus.webp.asset.json";
+import timeAsset from "@/assets/quiz/time.webp.asset.json";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [
+  head: () => ({
+    links: [{ rel: "preload", as: "image", href: age18, fetchPriority: "high" }],
+    meta: [
     { title: "Conviértete en una mujer de alto valor — Quiz de Muses Academy" },
     { name: "description", content: "Personaliza tu plan para despertar su interés con el quiz de relaciones de Muses Academy." },
     { property: "og:title", content: "Conviértete en una mujer de alto valor — Quiz de Muses Academy" },
     { property: "og:description", content: "Haz el quiz y recibe un plan personalizado para tu vida amorosa." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
-  ]}),
+    ],
+  }),
   component: Quiz,
 });
 
@@ -37,46 +35,23 @@ const steps: Step[] = [
   {kind:"info",title:"Más de 500.000 mujeres ya probaron nuestro plan para despertar su interés",body:"No tienes que cambiar quién eres. Solo necesitas descubrir cómo crear una conexión auténtica que despierte su interés.",variant:"research"},
   {section:"Tu vida amorosa",title:"¿Cuál es tu situación sentimental actual?",options:["Soltera","Es complicado","En una relación","Casada"]},
   {section:"Tu vida amorosa",title:"¿Qué te gustaría lograr en tu vida amorosa?",options:["Atraer al hombre indicado","Hacer que me extrañe","Casarme","Reavivar la conexión"]},
-  {section:"Tu vida amorosa",title:"¿A quién quieres atraer?",options:["A alguien que me interese","Al hombre que me gusta","A mi ex","A mi novio","A mi esposo","A mi prometido"]},
-  {kind:"info",title:"¡Podemos ayudarte a lograrlo!",body:"Es normal que reconectar con alguien del pasado se sienta difícil. Con el enfoque adecuado, puedes reconstruir el vínculo de una forma más natural y sincera.",image:help},
-  {section:"Tu vida amorosa",title:"¿Cuánto tiempo llevas soltera?",options:["Menos de 6 meses","De 6 meses a 1 año","De 1 a 3 años","Más de 3 años"]},
-  {section:"Tu vida amorosa",title:"¿Sientes que el hombre que te gusta no te ve de verdad?",options:["Sí","No","No estoy segura"]},
   {section:"Tu vida amorosa",title:"¿Sientes que tienes que esforzarte demasiado para llamar su atención?",options:["Sí, más de lo que quisiera","A veces","Rara vez","Nunca"]},
-  {section:"Tu vida amorosa",title:"¿Te cuesta lograr que él dé el primer paso?",options:["Sí","No"]},
-  {section:"Tu vida amorosa",title:"¿Sientes que no está disponible emocionalmente?",options:["Sí","A veces","No","No estoy segura"]},
   {section:"Tu vida amorosa",title:"¿Te confunden sus señales contradictorias?",options:["Sí, me confunden mucho","A veces","No","No estoy segura"]},
-  {section:"Tu vida amorosa",title:"¿Te sientes segura al coquetear?",options:["Sí, se me da muy bien","A veces, pero me pongo nerviosa","No mucho, me siento incómoda","Prefiero evitarlo"]},
-  {section:"Tu vida amorosa",title:"¿Alguna vez alguien dejó de responderte sin explicación?",options:["Sí","Más de una vez","Nunca"]},
-  {section:"Tu vida amorosa",title:"¿Con qué frecuencia sientes que das más de lo que recibes?",options:["Muy seguido","A veces","Casi nunca"]},
   {kind:"multi",section:"Tu vida amorosa",title:"¿Cuáles son tus principales desafíos en el amor?",subtitle:"Selecciona todas las que correspondan",options:["Atraer al hombre indicado","Lograr una relación seria","Mantener vivo su interés","Evitar relaciones que no me hacen bien","Superar el rechazo","Conocer personas en línea","Entender señales contradictorias","Otro"]},
-  {kind:"info",title:"¡Estamos contigo!",body:"Vas a descubrir herramientas prácticas para afrontar los desafíos del amor y construir la conexión que realmente deseas, con más claridad y menos ansiedad.",image:gotYou},
   {section:"Tu vida amorosa",title:"¿Cuándo fue la última vez que te sentiste amada y valorada?",options:["Hace menos de un año","Hace 2 o 3 años","Nunca","Me siento amada y valorada ahora"]},
-  {kind:"info",title:"¡No estás sola!",body:"Aunque haya pasado tiempo, el amor sigue estando a tu alcance. Te acompañaremos a crear una conexión más profunda, sana y plena.",image:notAlone},
-  {section:"Tu relación ideal",title:"¿Te gustaría sentir que tienes más influencia en tus relaciones?",options:["Sí","No","Mmm, no estoy segura"]},
-  {section:"Tu relación ideal",title:"¿Te gustaría que tu pareja expresara su amor con detalles?",options:["Sí, me encantaría","Tal vez","No necesariamente"]},
-  {section:"Tu relación ideal",title:"¿Qué detalle te haría más feliz?",options:["Una cena romántica","Flores","Un viaje sorpresa","Joyas","El vestido de mis sueños"]},
   {section:"Tu relación ideal",title:"¿Qué cualidad valoras más en una pareja?",options:["Amable","Fiel","Cariñoso","Que me apoye","Que valore a la familia"]},
-  {section:"Tu relación ideal",title:"¿Te gustaría estar con un hombre totalmente enamorado de ti?",options:["Sería un sueño","En cierta medida","Tal vez","No es necesario"]},
-  {kind:"info",title:"¡Convierte tus sueños en realidad!",body:"Empieza a construir la historia de amor que siempre imaginaste. Descubre formas sencillas de fortalecer la atracción y la cercanía emocional para crear una conexión viva y recíproca.",image:dreams},
   {section:"Amor y psicología",title:"¿Qué tan bien sientes que entiendes a los hombres?",options:["Muy bien, casi puedo leer su mente","A veces me cuesta entender lo que piensa","No tengo idea de lo que piensa"]},
   {kind:"info",title:"Basado en investigación psicológica",body:"Nuestro plan se basa en estudios sobre relaciones y comportamiento de universidades reconocidas como Oxford, Harvard y Stanford.",image:universities},
   {section:"Amor y psicología",title:"¿Has probado alguna estrategia para llamar la atención de un hombre?",options:["Sí, se me da muy bien","No, nunca","Probé algunas, pero no funcionaron"]},
-  {section:"Amor y psicología",title:"¿Te sientes cómoda aprendiendo nuevas habilidades?",options:["Sí","No","Mmm, no estoy segura"]},
   {kind:"multi",section:"Amor y psicología",title:"¿Qué técnicas ya conoces?",subtitle:"Selecciona todas las que correspondan",options:["No decir que sí de inmediato","La regla de contacto cero","Mantener el misterio","Ser cercana sin estar siempre disponible","Terminar la conversación primero","Ninguna de las anteriores"]},
   {kind:"scale",section:"Amor y psicología",title:"¿Cuánto sabes sobre la psicología masculina en las relaciones?",subtitle:"Los estudios indican que comprender mejor la psicología masculina puede ayudarte a construir relaciones más sanas y duraderas.",options:["Experta","Avanzada","Intermedia","Principiante"]},
-  {section:"Amor y psicología",title:"¿Sabías que el contacto físico puede fortalecer el vínculo emocional?",options:["No, nunca lo había escuchado","Me da curiosidad","Sí, lo aplico con frecuencia"]},
-  {section:"Amor y psicología",title:"¿Sabías que escuchar con atención puede fortalecer su conexión contigo?",options:["Sí, ya lo había escuchado","Me da curiosidad","No, esto es nuevo para mí"]},
-  {section:"Amor y psicología",title:"¿Conociste Muses Academy por recomendación de un coach de relaciones?",options:["Sí","No"]},
   {section:"Amor y psicología",title:"¿Alguna vez invertiste en programas de crecimiento personal o coaching?",options:["Sí, varias veces","Sí, una o dos veces","No, pero estoy abierta a hacerlo","No, y todavía tengo dudas"]},
   {kind:"info",title:"Tu plan será revisado por coaches de relaciones",body:"“Muses Academy te brinda herramientas basadas en psicología para crear una conexión emocional profunda y una atracción genuina.”",image:brain,variant:"coach"},
   {kind:"multi",section:"Ya casi terminamos",title:"¿Qué estrategias te gustaría aprender primero?",subtitle:"Selecciona todas las que correspondan",options:["Cómo crear una conexión más profunda","Cómo hacer que me extrañe","Cómo comprender mejor lo que piensa","Cómo despertar sus sentimientos por mí","Cómo motivarlo a tomar la iniciativa"]},
   {kind:"scale",section:"Ya casi terminamos",title:"¿Qué tan preparada te sientes para transformar tu vida amorosa?",options:["Totalmente lista\nMe siento preparada","Lista\nConfío en mí","Casi lista\nYa tengo algunos conocimientos","Aún no\nNecesito más preparación"]},
-  {kind:"info",title:"¡Fortalece tu confianza en el amor!",body:"Ya diste un paso importante. Conecta con tu seguridad natural y descubre cómo construir una atracción más profunda y auténtica.",image:confidence},
   {section:"Ya casi terminamos",title:"¿Te resulta fácil mantenerte enfocada?",options:["Sí, me concentro con facilidad","La mayoría de las veces, aunque a veces me distraigo","Me cuesta con frecuencia","No, suelo dejar las cosas para después"]},
-  {kind:"info",title:"Resumen de tu perfil",body:"Estás lista para vivir un amor real, aunque todavía tengas dudas sobre cómo encontrarlo. Te acompañaremos paso a paso.",image:profile,variant:"summary"},
-  {section:"Ya casi terminamos",title:"¿Tienes algún evento importante próximamente?",subtitle:"Tener una fecha especial en mente puede ayudarte a mantener la motivación",options:["Cumpleaños","Vacaciones","Una meta financiera","Nacimiento de un hijo","Jubilación","No tengo ningún evento cercano"]},
-  {section:"Ya casi terminamos",title:"¿Cuándo será ese evento?",subtitle:"Tendremos en cuenta esta fecha especial durante tu proceso",options:["En una semana","En un mes","En unos meses","Durante el próximo año","Omitir este paso"]},
-  {section:"Ya casi terminamos",title:"¿Cuánto tiempo al día quieres dedicar a mejorar tu vida amorosa?",options:["5 min al día","10 min al día","15 min al día","20 min al día"],image:time},
+  {kind:"info",title:"Resumen de tu perfil",body:"Estás lista para vivir un amor real, aunque todavía tengas dudas sobre cómo encontrarlo. Te acompañaremos paso a paso.",image:profileAsset.url,variant:"summary"},
+  {section:"Ya casi terminamos",title:"¿Cuánto tiempo al día quieres dedicar a mejorar tu vida amorosa?",options:["5 min al día","10 min al día","15 min al día","20 min al día"],image:timeAsset.url},
   {kind:"info",title:"Tu plan ideal para atraer al hombre indicado",body:"Según tus respuestas, puedes desarrollar la confianza y las habilidades que necesitas para transformar tu vida amorosa antes de diciembre de 2026.",variant:"plan"},
 ];
 
@@ -114,7 +89,7 @@ function Quiz(){
  </main>
 }
 
-function Welcome({onStart}:{onStart:()=>void}){const ages=[[age18,"18-29"],[age30,"30-39"],[age40,"40-49"],[age50,"50+"]];return <main className="welcome"><Brand/><div className="welcome-copy"><h1>CONVIÉRTETE EN UNA MUJER DE ALTO VALOR</h1><h2>Y DESPIERTA SU INTERÉS</h2><p>Responde este quiz para personalizar tu experiencia<br/>Comienza seleccionando tu edad</p></div><div className="age-grid">{ages.map(([src,label])=><button key={label} onClick={onStart} className="age-card"><img src={src} alt=""/><span>{label}</span></button>)}</div><p className="legal">Al continuar, aceptas los <a href="https://quiz.musesacademy.io/terms">Términos y condiciones</a>, <a href="https://quiz.musesacademy.io/privacy">Política de privacidad</a>, <a href="https://quiz.musesacademy.io/subterms">Términos de suscripción</a>.</p><footer>© 2026 APPSORAMA MEDIA LIMITED, Hong Kong. Todos los derechos reservados.</footer></main>}
+function Welcome({onStart}:{onStart:()=>void}){const ages=[[age18,"18-29"],[age30,"30-39"],[age40,"40-49"],[age50,"50+"]];return <main className="welcome"><Brand/><div className="welcome-copy"><h1>CONVIÉRTETE EN UNA MUJER DE ALTO VALOR</h1><h2>Y DESPIERTA SU INTERÉS</h2><p>Responde este quiz para personalizar tu experiencia<br/>Comienza seleccionando tu edad</p></div><div className="age-grid">{ages.map(([src,label],index)=><button key={label} onClick={onStart} className="age-card"><img src={src} alt="" loading={index===0?"eager":"lazy"} decoding="async" fetchPriority={index===0?"high":"auto"}/><span>{label}</span></button>)}</div><p className="legal">Al continuar, aceptas los <a href="https://quiz.musesacademy.io/terms">Términos y condiciones</a>, <a href="https://quiz.musesacademy.io/privacy">Política de privacidad</a>, <a href="https://quiz.musesacademy.io/subterms">Términos de suscripción</a>.</p><footer>© 2026 APPSORAMA MEDIA LIMITED, Hong Kong. Todos los derechos reservados.</footer></main>}
 
 function InfoPage({step,onBack,onNext}:{step:Info;onBack:()=>void;onNext:()=>void}){return <main className="quiz-shell info-page"><div className="info-header"><button aria-label="Volver" onClick={onBack} className="back-button"><ArrowLeft/></button><Brand/><span className="top-spacer"/></div><section className="info-content">
  {step.variant==="research"?<Research step={step}/>:step.variant==="summary"?<Summary step={step}/>:step.variant==="plan"?<Plan step={step}/>:<><h1>{step.title}</h1><p>{step.body}</p>{step.image&&<img src={step.image} alt="" className={`info-image ${step.variant==="coach"?"coach-image":""}`}/>} {step.variant==="coach"&&<div className="coach-card"><strong>Contenido revisado por un especialista</strong><span>Santiago Delgado · Coach de relaciones</span></div>}</>}
@@ -122,6 +97,6 @@ function InfoPage({step,onBack,onNext}:{step:Info;onBack:()=>void;onNext:()=>voi
 function Research({step}:{step:Info}){return <><div className="research-number">Más de 500.000 mujeres</div><div className="research-kicker">ya probaron nuestro</div><h1>plan para despertar su interés</h1><p>{step.body}</p><div className="team-card"><div className="avatar">MA</div><span><strong>Equipo de Muses Academy</strong><small>Respaldado por investigaciones de universidades reconocidas.</small></span></div></>}
 function Summary({step}:{step:Info}){return <><h1 className="center-title">{step.title}</h1><div className="summary-card"><div className="summary-label"><strong>Nivel de confianza</strong><small>Excelente</small></div><div className="confidence-meter"><i/></div><div className="meter-labels"><span>Bajo</span><span>Intermedio</span><span>Alto</span></div></div><div className="summary-note"><strong>♨ ¡Tienes un gran potencial para transformar tu vida amorosa!</strong><p>{step.body}</p></div><div className="profile-card"><div className="traits"><span>🎯 <small>Motivación</small><b>Alto</b></span><span>⭐ <small>Potencial</small><b>Alto</b></span><span>◷ <small>Enfoque</small><b>Amplio</b></span><span>📚 <small>Conocimiento</small><b>Alto</b></span></div><img src={step.image} alt=""/></div><small className="illustrative">Imagen con fines ilustrativos</small></>}
 function Plan({step}:{step:Info}){return <><h1 className="plan-title"><span>Tu plan ideal para</span>atraer al hombre indicado</h1><p>{step.body}</p><div className="chart"><div className="chart-line"/><div className="chart-months"><span>Oct</span><span>Nov</span><span>Dic</span><span>Ene</span></div><div className="chart-label"><span>Ahora</span><span>Confianza en el amor</span></div></div><small className="illustrative">Este gráfico es ilustrativo; los resultados pueden variar.</small></>}
-function ScaleGraphic(){return <div className="scale-graphic"><div className="scale-person"><img src={focus} alt=""/></div><div className="scale-lines"><span/><span/><span/><span/></div></div>}
+function ScaleGraphic(){return <div className="scale-graphic"><div className="scale-person"><img src={focusAsset.url} alt="" loading="lazy" decoding="async"/></div><div className="scale-lines"><span/><span/><span/><span/></div></div>}
 function Loading({progress,onBack}:{progress:number;onBack:()=>void}){const label=progress<30?"Definiendo tus objetivos":progress<65?"Analizando tus respuestas":progress<100?"Personalizando tu plan":"Tu plan está listo";return <main className="quiz-shell loading-page"><div className="info-header"><button aria-label="Volver" onClick={onBack} className="back-button"><ArrowLeft/></button><Brand/><span className="top-spacer"/></div><h1><span>Más de 500.000 mujeres</span>eligieron Muses Academy</h1><p>Estamos creando tu plan personal...</p><div className="loading-label"><span>{label}</span><span>{progress}%</span></div><div className="loading-bar"><i style={{width:`${progress}%`}}/></div><Review/></main>}
 function Review(){return <div className="review-card"><div className="review-head"><span className="review-avatar">K</span><span><b>Kass</b><small>1 reseña · EE. UU.</small></span></div><div className="review-stars">★★★★★ <small>Verificada</small></div><b>Apenas comencé a aplicar este paso...</b><p>Apenas comencé a aplicar este paso y, después de cuatro días, me escribió para decirme que me extraña.</p><small>Fecha de la experiencia: 15 de mayo de 2025</small></div>}
