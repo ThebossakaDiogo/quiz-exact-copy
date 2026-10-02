@@ -1,0 +1,2 @@
+- [x] Recreate full quiz flow and visuals
+- [x] Validate progression, selections, and final loading state
