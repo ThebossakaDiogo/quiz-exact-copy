@@ -1,2 +1,3 @@
 - [x] Recreate full quiz flow and visuals
 - [x] Validate progression, selections, and final loading state
+- [x] Fix broken option layouts and revalidate every quiz step

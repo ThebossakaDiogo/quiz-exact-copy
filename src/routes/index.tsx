@@ -104,7 +104,7 @@ function Quiz(){
     <div className={`option-list ${step.kind==="scale"?"scale-options":""}`}>
       {step.options.map((option,i)=>{const active=selected.includes(option); return <AppButton key={option} onClick={()=>choose(option,step.kind==="multi")} className={`option-button ${active?"selected":""}`}>
         {step.kind!=="multi"&&<span className="option-icon">{i===0?<Heart/>:<Sparkles/>}</span>}
-        <span>{option.split("\n").map((line,j)=><span key={line} className={j?"option-detail":""}>{line}</span>)}</span>
+        <span className="option-copy">{option.split("\n").map((line,j)=><span key={line} className={j?"option-detail":""}>{line}</span>)}</span>
         {step.kind==="multi"&&<span className="check-circle">{active&&<Check/>}</span>}
       </AppButton>})}
     </div>
